@@ -1,0 +1,59 @@
+<html>
+<head>
+<script>
+
+if (!Array.prototype.indexOf)
+  Array.prototype.indexOf = function(searchValue, index) {
+   var len = this.length >>> 0;
+    index |= 0;             
+    if (index < 0)            
+      index = Math.max(len - index, 0);
+    else if (index >= len) 
+      return -1;
+    if (searchValue === undefined)
+     do {
+        if (index in this && this[index] === undefined)
+          return index;
+      } while (++index !== len)
+    else
+      do {
+        if (this[index] === searchValue)
+          return index;
+      } while (++index !== len)   
+     return -1;
+  };
+  //Code to set the cookie
+function tvc_cookie(msg) {
+    var tvc_domain = '<DOMAIN>';//Provide your domain name
+    var myDate = new Date();
+    myDate.setMonth(myDate.getMonth() + 24);
+    //Set the _ga cookie
+    document.cookie = "tvc_universalCookie=" + msg + ";expires=" + myDate + ";domain="+tvc_domain+";path=/";
+    document.cookie = "tvc_utp=1;expires=" + myDate + ";domain="+tvc_domain+";path=/";
+
+}
+//Check whether cookie value is present in  URL or not
+// Here we are using tvc_universalCookie 
+try{
+  if (document.location.href.indexOf('tvc_universalCookie') !== -1) {
+      tvc_cookie_value = document.location.href.split ('?tvc_universalCookie=')[1];
+      if(!tvc_cookie_value.length || tvc_cookie_value=="undefined" || tvc_cookie_evalue=="null"){}
+      else{
+         tvc_cookie(tvc_cookie_value);
+      }
+  }
+}catch(err){
+  var sheet = '<Sheet EXEC endpoint>'; //Provide your google sheet endpoint here
+  var tvc_sheetName = '<SHEETNAME>'; // Provide the sheetname here
+  var page_url = document.location.href;
+  var tvc_errorlog = new Image(); 
+tvc_errorlog.src=sheet+"?Tag_name=tvc_de-duplication&tvc_error="+err.name+"&Error_Msg="+err.message+"&Page=" + page_url+"&sheetname="+tvc_sheetName;
+}
+</script>
+</head>
+<body>
+  
+
+</body>
+
+<html>
