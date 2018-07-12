@@ -2,6 +2,8 @@
 <head>
 <script>
 
+
+//Pollyfill for indexOf method
 if (!Array.prototype.indexOf)
   Array.prototype.indexOf = function(searchValue, index) {
    var len = this.length >>> 0;
@@ -24,31 +26,30 @@ if (!Array.prototype.indexOf)
   };
   //Code to set the cookie
 function tvc_cookie(msg) {
-    var tvc_domain = '<DOMAIN>';//Provide your domain name
+    var tvc_domain = 'jinal28.github.io';//Provide your domain name
     var myDate = new Date();
     myDate.setMonth(myDate.getMonth() + 24);
-    //Set the _ga cookie
-    document.cookie = "tvc_universalCookie=" + msg + ";expires=" + myDate + ";domain="+tvc_domain+";path=/";
-    document.cookie = "tvc_utp=1;expires=" + myDate + ";domain="+tvc_domain+";path=/";
+    //
+    document.cookie = "_ga=" + msg + ";expires=" + myDate + ";domain="+tvc_domain+";path=/";
+ document.cookie = "tvc_utp=1;expires=" + myDate + ";domain="+tvc_domain+";path=/";
+
 
 }
 //Check whether cookie value is present in  URL or not
-// Here we are using tvc_universalCookie 
+var tvc_cookie_value ;
 try{
-  if (document.location.href.indexOf('tvc_universalCookie') !== -1) {
-      tvc_cookie_value = document.location.href.split ('?tvc_universalCookie=')[1];
-      if(!tvc_cookie_value.length || tvc_cookie_value=="undefined" || tvc_cookie_evalue=="null"){}
+  if (document.location.href.indexOf('_ga') !== -1) {
+      tvc_cookie_value = document.location.href.split ('?_ga=')[1];
+      if(!tvc_cookie_value.length || tvc_cookie_value=="undefined" || tvc_cookie_value=="null"){}
       else{
          tvc_cookie(tvc_cookie_value);
       }
   }
 }catch(err){
-  var sheet = '<Sheet EXEC endpoint>'; //Provide your google sheet endpoint here
-  var tvc_sheetName = '<SHEETNAME>'; // Provide the sheetname here
-  var page_url = document.location.href;
-  var tvc_errorlog = new Image(); 
-tvc_errorlog.src=sheet+"?Tag_name=tvc_de-duplication&tvc_error="+err.name+"&Error_Msg="+err.message+"&Page=" + page_url+"&sheetname="+tvc_sheetName;
+  console.log(err);
 }
+
+
 </script>
 </head>
 <body>
